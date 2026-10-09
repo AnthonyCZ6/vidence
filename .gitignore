@@ -1,0 +1,25 @@
+# Evidencia, bóveda y workspaces: nunca deben versionarse
+data/
+
+# Modelos de IA (se aprovisionan con backend/scripts/provision_models.py)
+models/
+
+# Corpus sintético de pruebas (se regenera con backend/scripts/generate_test_corpus.py)
+samples/corpus/
+
+# Entorno y configuración local
+backend/.venv/
+backend/.env
+
+# Artefactos de Python y pruebas
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.partial
+
+# Grabaciones personales y reportes generados (contienen rutas locales)
+video/
+reports/

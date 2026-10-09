@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vidence · Evidencia local</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <div>
+        <h1>Vidence</h1>
+        <p>Gestión local de evidencia multimedia</p>
+      </div>
+    </div>
+    <ul class="pills" id="status-pills" aria-label="Estado del sistema">
+      <li class="pill pill-muted">Conectando…</li>
+    </ul>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" aria-labelledby="list-title">
+      <div class="sidebar-head">
+        <h2 id="list-title">Evidencias</h2>
+        <button type="button" class="btn-ghost" id="refresh-list" aria-label="Actualizar lista">Actualizar</button>
+      </div>
+      <ol class="evidence-list" id="evidence-list"></ol>
+      <p class="muted empty" id="list-empty" hidden>Aún no hay evidencias.</p>
+    </aside>
+
+    <main class="main">
+      <section class="card" aria-labelledby="capture-title">
+        <div class="card-head">
+          <h2 id="capture-title">Nueva evidencia</h2>
+          <div class="tabs" role="tablist" aria-label="Modo de captura">
+            <button type="button" role="tab" id="tab-record" aria-controls="panel-record" aria-selected="true">Grabar</button>
+            <button type="button" role="tab" id="tab-upload" aria-controls="panel-upload" aria-selected="false">Subir archivo</button>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="panel-record" role="tabpanel" aria-labelledby="tab-record">
+          <fieldset class="segmented">
+            <legend class="visually-hidden">Tipo de grabación</legend>
+            <label><input type="radio" name="rec-kind" value="audio" checked> Audio</label>
+            <label><input type="radio" name="rec-kind" value="video"> Video</label>
+          </fieldset>
+          <video id="rec-preview" class="rec-preview" muted playsinline hidden></video>
+          <div class="rec-controls">
+            <button type="button" class="btn-primary" id="rec-toggle">
+              <span class="rec-dot" aria-hidden="true"></span>
+              <span id="rec-label">Iniciar grabación</span>
+            </button>
+            <span class="rec-timer" id="rec-timer" aria-live="polite">00:00</span>
+          </div>
+          <p class="hint" id="capture-hint">La grabación se envía solo a este equipo y se cifra al recibirse.</p>
+        </div>
+
+        <div class="tab-panel" id="panel-upload" role="tabpanel" aria-labelledby="tab-upload" hidden>
+          <label class="dropzone" id="dropzone">
+            <input type="file" id="file-input"
+                   accept=".mp4,.mkv,.mov,.webm,.mp3,.wav,.m4a,.ogg,.flac,.aac,audio/*,video/*">
+            <strong>Arrastre un archivo o haga clic para elegirlo</strong>
+            <span class="muted">mp4 · mkv · mov · webm · mp3 · wav · m4a · ogg · flac · aac</span>
+          </label>
+        </div>
+      </section>
+
+      <section class="card" id="progress" hidden aria-live="polite" aria-labelledby="progress-title">
+        <div class="card-head">
+          <h2 id="progress-title">Procesamiento local</h2>
+          <span class="muted truncate" id="progress-file"></span>
+        </div>
+        <ol class="stages" id="stages"></ol>
+        <div class="bar" aria-hidden="true"><span id="bar-fill"></span></div>
+        <p class="error" id="progress-error" hidden></p>
+      </section>
+
+      <div id="result" class="result" hidden></div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    Sin internet · Sin telemetría · Sin clasificación de riesgo. Vidence solo captura, mejora, transcribe y resguarda.
+  </footer>
+</body>
+</html>

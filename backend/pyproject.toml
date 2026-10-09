@@ -1,0 +1,34 @@
+[project]
+name = "vidence"
+version = "0.1.0"
+description = "Gestión local, offline y cifrada de evidencia multimedia personal (MVP)."
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra --strict-markers"
+markers = [
+    "ffmpeg: requiere ffmpeg/ffprobe instalados",
+    "slow: ejecuta un modelo de IA real (Whisper tiny)",
+]
+
+[tool.coverage.run]
+source = ["app"]
+omit = ["app/__main__.py"]
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "SIM", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests: asserts, frases/puertos de prueba, subprocess con argumentos fijos y caracteres
+# Unicode engañosos usados a propósito para probar el saneamiento.
+"tests/*" = ["S101", "S104", "S105", "S108", "S603", "RUF001"]
+"scripts/*" = ["S310"]

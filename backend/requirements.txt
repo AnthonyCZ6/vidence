@@ -1,0 +1,11 @@
+# Vidence MVP — dependencias de ejecución.
+# Ninguna dependencia directa es un SDK de nube. `faster-whisper` arrastra
+# `huggingface_hub` de forma transitiva: se neutraliza con HF_HUB_OFFLINE=1,
+# carga de modelos desde ruta local y el audit hook de app/offline_guard.py.
+fastapi==0.143.0
+uvicorn==0.54.0
+pydantic==2.14.0
+pydantic-settings==2.15.0
+faster-whisper==1.2.1
+opencv-python-headless==5.0.0.93
+cryptography==50.0.2
